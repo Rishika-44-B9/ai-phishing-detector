@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>AI Phishing Detector</h2>
+
+<input id="msg" placeholder="Enter message">
+
+<button onclick="scan()">Scan</button>
+
+<p id="result"></p>
+
+<script>
+
+function scan(){
+
+let message=document.getElementById("msg").value;
+
+fetch("http://127.0.0.1:5000/detect",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({message:message})
+})
+.then(res=>res.json())
+.then(data=>{
+document.getElementById("result").innerText=data.result;
+});
+
+}
+
+</script>
+
+</body>
+</html>
